@@ -1,0 +1,27 @@
+{% extends 'imgstore/index.html'%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    {% block applicationUI %}
+    
+    <div id='form-container'>
+        <!-- direct the link to here  "action='image_box' "" -->
+        <form enctype="multipart/form-data" action='imagebox'method='POST'>{% csrf_token %}
+            <label>Image Upload:</label>
+            <input type='file' id='img_upload' name='img_input' accept="image/*" required>
+            <label>Image Label:</label>
+            <input type='text' id='img_caption' name='img_caption' required>
+            <input type='submit' id='img_submit' value='Upload'>
+        </form>
+    </div>
+
+    {% endblock %}
+</body>
+</html>
