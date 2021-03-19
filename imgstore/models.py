@@ -8,5 +8,5 @@ class Userinfo(models.Model):
 
 class Images(models.Model):
     image_code = models.BinaryField()
-    image_type = models.CharField(max_length=20,default=False)
+    image_type = models.CharField(max_length=20,default="N/A")
     caption = models.CharField(max_length=100,default='IMG_CAPTION')

@@ -1,9 +1,32 @@
 {% extends 'imgstore/index.html'%}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
 {% block applicationUI %}
 <h2>Image Store</h2>
-<div id='img_container'>
-    <img alt='testing image' src={{img_src}} height=100></img>
+<div id='store_container'>
+    {% for i in store_content%}
+    <div id='img_container'>
+        <img class='img_frame'alt='store_img' src={{i.img_src}}></img>
+        <div class='control_panel'>
+            <p>{{i.img_caption}}</p>
+            <form>
+                <input class="property_change" type="button" value='Delete'>
+            </form>
+            <form>
+                <input class="property_change" type="button" value='Edit Info'>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-
 {% endblock %}
+
+</body>
+</html>

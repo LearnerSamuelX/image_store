@@ -34,16 +34,14 @@ def imagebox(request):
         'img_src':img_src
     }
     
-    return render(request,'imgstore/store.html',context)
+    # return render(request,'imgstore/store.html',context)
+    return HttpResponse('Image Added!')
 
 #used in form input
 def store(request):
 
-    store_length = len(Images.objects.all())
-    image_shown = Images.objects.all()[store_length-1]
-
     image_list = Images.objects.all()
-    print(type(image_list))
+
     #create an array of objects
     store = []
 
@@ -61,16 +59,10 @@ def store(request):
             'img_src':img_src,
             'img_caption':img_caption
         }
-        store.append(container)
+        store.insert(0,container)
 
-
-    # byte_info = image_shown.image_code.tobytes()
-    # image_type = image_shown.image_type
-
-    # converted = base64.b64encode(byte_info)
-    # byte_in_str = str(converted.decode("utf-8"))
-    # img_src = "data:"+image_type+";base64,"+byte_in_str
-
-    context = store
+    context = {
+        'store_content':store
+    }
     return render(request,'imgstore/store.html',context)
     
