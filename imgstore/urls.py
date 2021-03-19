@@ -8,5 +8,11 @@ urlpatterns = [
     path('store',views.store,name='store'),
 
     #path for image upload redirecting
-    path('imagebox', views.imagebox,name='imagebox')
+    path('imagebox', views.imagebox,name='imagebox'),
+
+    #path for delete photo
+    path('imagebox/image_deleted/<int:id_num>',views.image_delete,name='image_delete'),
+
+    #path for content change (caption in this case)
+    path('imagebox/caption_changed/<int:id_num>', views.caption_change, name='caption_change')
 ]

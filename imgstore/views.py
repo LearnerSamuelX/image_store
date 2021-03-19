@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Images
@@ -41,10 +41,8 @@ def imagebox(request):
 def store(request):
 
     image_list = Images.objects.all()
-
     #create an array of objects
     store = []
-
     for i in range (0, len(image_list)):
         img_id = image_list[i].id
         byte_info = image_list[i].image_code.tobytes()
@@ -65,4 +63,12 @@ def store(request):
         'store_content':store
     }
     return render(request,'imgstore/store.html',context)
+
+def image_delete(request,id_num):
+    Images.objects.filter(id=id_num).delete()
+    return redirect('store')
     
+def caption_change(request,id_num):
+    Images.objects.filter(id=id_num).update(caption=request.POST['img_caption'],id=id_num)
+    return redirect('store')
+

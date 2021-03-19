@@ -16,17 +16,36 @@
         <img class='img_frame'alt='store_img' src={{i.img_src}}></img>
         <div class='control_panel'>
             <p>{{i.img_caption}}</p>
-            <form>
-                <input class="property_change" type="button" value='Delete'>
+            <form action="imagebox/image_deleted/{{i.id}}" id="delete_form_{{i.id}}"method='POST'>{% csrf_token %}
+                <input id='delete_button_{{i.id}}' class="property_change" type="submit" value='Delete'>
             </form>
-            <form>
-                <input class="property_change" type="button" value='Edit Info'>
+            <div id="{{i.id}}" class="property_change non_botton" onClick="reply_click(this.id)">
+                Edit
+            </div>
+            <form action="imagebox/caption_changed/{{i.id}}" class="stealth" id="edit_form_{{i.id}}" method='POST'>{% csrf_token %}
+                <input class="caption_editing" type="text" name="img_caption" value="{{i.img_caption}}">
+                <input class="property_change" type="submit" value='Save'>
             </form>
         </div>
     </div>
     {% endfor %}
 </div>
-{% endblock %}
 
+<script>
+    var click_detector = 0;
+    function reply_click(this_id){
+        var index = this_id
+        if(click_detector===0){
+            document.getElementById('edit_form_'+index).style.display='block'
+            document.getElementById('delete_button_'+index).disabled=true
+            click_detector=1
+        }else{
+            document.getElementById('edit_form_'+index).style.display='none'
+            document.getElementById('delete_button_'+index).disabled=false
+            click_detector=0
+        }
+    }
+</script>
+{% endblock %}
 </body>
 </html>
