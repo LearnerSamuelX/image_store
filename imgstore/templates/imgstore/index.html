@@ -58,8 +58,11 @@
     }
 
     .control_panel{
+        display:flex;
+        /* border:2.5px rgb(177, 175, 72) solid; */
+        flex-direction: row;
         text-align: center;
-        width:15rem;
+        width:16rem;
         margin-left:auto;
         margin-right:auto;
     }
@@ -67,20 +70,34 @@
     .property_change{
         cursor: pointer;
         font-size: 15px;
-        width:4rem;
+        width:5rem;
         border:2.5px grey solid;
         border-radius: 0;
         margin-bottom: 1rem;
     }
 
+    .property_change_2{
+        cursor: pointer;
+        font-size: 15px;
+        width:5rem;
+        border:2.5px grey solid;
+        border-radius: 0;
+        margin-top:1rem;
+        margin-bottom: 1rem;
+    }
+
     .non_botton{
         font-size: 15px;
-        width:3.5rem;
-        margin-left: auto;
-        margin-right:auto;
+        width:5rem;
+        margin-left:5px;
+        
     }
 
     .stealth{
+        display:none;
+    }
+
+    .stealth_2{
         display:none;
     }
 </style>

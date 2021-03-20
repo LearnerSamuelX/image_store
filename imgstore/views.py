@@ -30,12 +30,7 @@ def imagebox(request):
     #save the 'new_image' to data base
     new_image = Images.objects.create(image_code=byte_info,caption=image_info,image_type=image_type)
 
-    context = {
-        'img_src':img_src
-    }
-    
-    # return render(request,'imgstore/store.html',context)
-    return HttpResponse('Image Added!')
+    return redirect('store')
 
 #used in form input
 def store(request):
@@ -72,3 +67,10 @@ def caption_change(request,id_num):
     Images.objects.filter(id=id_num).update(caption=request.POST['img_caption'],id=id_num)
     return redirect('store')
 
+def image_change(request,id_num):
+
+    byte_info = request.FILES['img_input'].file.read()
+    image_type = request.FILES['img_input'].content_type[6:]
+    Images.objects.filter(id=id_num).update(image_code=byte_info,image_type=image_type)
+
+    return redirect('store')

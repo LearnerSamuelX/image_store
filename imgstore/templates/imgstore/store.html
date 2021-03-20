@@ -14,35 +14,61 @@
     {% for i in store_content%}
     <div id='img_container'>
         <img class='img_frame'alt='store_img' src={{i.img_src}}></img>
+        <p>{{i.img_caption}}</p>
         <div class='control_panel'>
-            <p>{{i.img_caption}}</p>
             <form action="imagebox/image_deleted/{{i.id}}" id="delete_form_{{i.id}}"method='POST'>{% csrf_token %}
                 <input id='delete_button_{{i.id}}' class="property_change" type="submit" value='Delete'>
             </form>
-            <div id="{{i.id}}" class="property_change non_botton" onClick="reply_click(this.id)">
-                Edit
+            <div id="{{i.id}}" class="property_change non_botton" onClick="edit_click(this.id)">
+                Edit Name
             </div>
-            <form action="imagebox/caption_changed/{{i.id}}" class="stealth" id="edit_form_{{i.id}}" method='POST'>{% csrf_token %}
-                <input class="caption_editing" type="text" name="img_caption" value="{{i.img_caption}}">
-                <input class="property_change" type="submit" value='Save'>
-            </form>
+            <div id='{{i.id}}_img'class="property_change non_botton" onClick="newimgclick(this.id)">
+                New Image
+            </div>
         </div>
+        <form action="imagebox/caption_changed/{{i.id}}" class="stealth" id="edit_form_{{i.id}}" method='POST'>{% csrf_token %}
+            <input class="caption_editing" type="text" name="img_caption" value="{{i.img_caption}}">
+            <input class="property_change" type="submit" value='Save'>
+        </form>
+        <form  enctype="multipart/form-data" action="imagebox/image_changed/{{i.id}}"class="stealth_2" id="new_img_{{i.id}}"method="POST">{% csrf_token %}
+            <input type="file"name="img_input"accept="image/*" required>
+            <input class="property_change_2" type="submit" value='Upload'>
+        </form>
+        
     </div>
     {% endfor %}
 </div>
 
 <script>
-    var click_detector = 0;
-    function reply_click(this_id){
+    var click_detector_1 = 0
+    var click_detector_2 = 0
+    
+    function edit_click(this_id){
         var index = this_id
-        if(click_detector===0){
+        if(click_detector_1===0){
             document.getElementById('edit_form_'+index).style.display='block'
             document.getElementById('delete_button_'+index).disabled=true
-            click_detector=1
+            click_detector_1=1
+            click_detector_2=0
         }else{
             document.getElementById('edit_form_'+index).style.display='none'
             document.getElementById('delete_button_'+index).disabled=false
-            click_detector=0
+            click_detector_1=0
+            click_detector_2=1
+        }
+    }
+
+    function newimgclick(this_id){
+        var index= this_id[0]
+        console.log(index)
+        if(click_detector_2===0){
+            document.getElementById('new_img_'+index).style.display='block'
+            click_detector_2=1
+            click_detector_1=0
+        }else{
+            document.getElementById('new_img_'+index).style.display='none'
+            click_detector_2=0
+            click_detector_1=0
         }
     }
 </script>

@@ -14,5 +14,8 @@ urlpatterns = [
     path('imagebox/image_deleted/<int:id_num>',views.image_delete,name='image_delete'),
 
     #path for content change (caption in this case)
-    path('imagebox/caption_changed/<int:id_num>', views.caption_change, name='caption_change')
+    path('imagebox/caption_changed/<int:id_num>', views.caption_change, name='caption_change'),
+
+    #path for image change
+    path('imagebox/image_changed/<int:id_num>', views.image_change, name='image_change'),
 ]
