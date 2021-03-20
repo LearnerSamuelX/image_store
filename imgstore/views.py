@@ -12,9 +12,7 @@ def index(request):
     context = {}
     return HttpResponse(template.render(context,request))
 
-
 def imagebox(request):
-
     if request.method=='GET':
         context = {}
         return render(request,'imgstore/error.html', context)

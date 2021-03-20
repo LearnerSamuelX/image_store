@@ -23,7 +23,7 @@
                 Edit Name
             </div>
             <div id='{{i.id}}_img'class="property_change non_botton" onClick="newimgclick(this.id)">
-                New Image
+                Change Pic
             </div>
         </div>
         <form action="imagebox/caption_changed/{{i.id}}" class="stealth" id="edit_form_{{i.id}}" method='POST'>{% csrf_token %}

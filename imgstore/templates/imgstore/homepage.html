@@ -10,18 +10,16 @@
 
 <body>
     {% block applicationUI %}
-    
     <div id='form-container'>
         <!-- direct the link to here  "action='image_box' "" -->
         <form enctype="multipart/form-data" action='imagebox'method='POST'>{% csrf_token %}
             <label>Image Upload:</label>
             <input type='file' id='img_upload' name='img_input' accept="image/*" required>
-            <label>Image Label:</label>
+            <label>Image Name:</label>
             <input type='text' id='img_caption' name='img_caption' required>
             <input type='submit' id='img_submit' value='Upload'>
         </form>
     </div>
-
     {% endblock %}
 </body>
 </html>
